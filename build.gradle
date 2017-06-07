@@ -6,17 +6,25 @@ project(':common') {
 }
 
 project(':server-core') {
-    apply plugin: 'java'
+    dependencies {
+        compile project(':common')
+    }
 }
 
 project(':server-ui') {
-    apply plugin: 'java'
+    dependencies {
+        compile project(':common')
+    }
 }
 
 project(':tracker-core') {
-    apply plugin: 'java'
+    dependencies {
+        compile project(':common')
+    }
 }
 
 project(':tracker-ui') {
-    apply plugin: 'java'
+    dependencies {
+        compile project(':common')
+    }
 }
