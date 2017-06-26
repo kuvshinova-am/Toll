@@ -27,6 +27,8 @@ project(':server-core') {
     apply plugin: 'gradle-one-jar'
     dependencies {
         compile project(':common')
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+
     }
     task fatJar(type: OneJar) {
         mainClass = 'jdev.server.core.Main'
@@ -38,6 +40,7 @@ project(':server-ui') {
     apply plugin: 'gradle-one-jar'
     dependencies {
         compile project(':common')
+        testCompile group: 'junit', name: 'junit', version: '4.12'
     }
     task fatJar(type: OneJar) {
         mainClass = 'jdev.server.ui.Main'
@@ -50,6 +53,7 @@ project(':tracker-core') {
 
     dependencies {
         compile project(':common')
+        testCompile group: 'junit', name: 'junit', version: '4.12'
     }
 
     task fatJar(type: OneJar) {
@@ -62,6 +66,7 @@ project(':tracker-ui') {
     apply plugin: 'gradle-one-jar'
     dependencies {
         compile project(':common')
+        testCompile group: 'junit', name: 'junit', version: '4.12'
     }
 
     task fatJar(type: OneJar) {
