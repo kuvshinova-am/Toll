@@ -1,5 +1,8 @@
-package jdev.tracker.core.services;
+package jdev.tracker.core;
 
+import jdev.tracker.core.services.DataPeekService;
+import jdev.tracker.core.services.DataSendService;
+import jdev.tracker.core.services.GpsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -8,6 +11,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class InjectionContext {
 
+    @Bean
+    public GpsService gpsService() {
+        return new GpsService();
+    }
     @Bean
     public DataPeekService peekService() {
         return new DataPeekService();
