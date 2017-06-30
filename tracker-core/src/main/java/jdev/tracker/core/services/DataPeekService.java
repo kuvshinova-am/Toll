@@ -15,18 +15,19 @@ public class DataPeekService {
     private BlockingDeque<Point> queue =  new LinkedBlockingDeque<>(10000);
 
     @Autowired
-    private DataSendService dataSendService;
-    @Autowired
     private GpsService gpsService;
 
     @PostConstruct
     public void init() {
-        dataSendService.callFromInit();
         gpsService.getCoordinates();
     }
 
     @Scheduled(cron = "*/1 * * * * *")
     void put() throws InterruptedException {
         queue.put(gpsService.getCoordinates());
+    }
+
+    Point get() throws InterruptedException {
+        return  queue.take();
     }
 }

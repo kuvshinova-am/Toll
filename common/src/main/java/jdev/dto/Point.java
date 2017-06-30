@@ -73,6 +73,9 @@ public class Point {
                 "lat=" + lat +
                 ", lon=" + lon +
                 ", autoId='" + autoId + '\'' +
+                ", time=" + time +
+                ", azimuth=" + azimuth +
+                ", speed=" + speed +
                 '}';
     }
 }
