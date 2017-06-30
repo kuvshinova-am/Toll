@@ -14,12 +14,9 @@ public class GpsService {
     private int currentAzimuth = 0;
     private int currentSpeed = 0;
 
-    @Autowired
-    private DataPeekService dataPeekService;
-
     @PostConstruct
     @Scheduled(cron = "*/1 * * * * *")
-    public void getCoordinates() {
+    public Point getCoordinates() {
         Point point = new Point();
         point.setLat(currentLet++);
         point.setLon(currentLon++);
@@ -27,5 +24,6 @@ public class GpsService {
         point.setTime(System.currentTimeMillis());
         point.setAzimuth(currentAzimuth++);
         point.setSpeed(currentSpeed++);
+        return point;
     }
 }
