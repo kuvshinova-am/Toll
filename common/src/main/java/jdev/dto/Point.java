@@ -9,6 +9,9 @@ public class Point {
     private double lon;
     private String autoId;
     private long time;
+    private double azimuth;
+    private int speed;
+
 
     public double getLat() {
         return lat;
@@ -34,6 +37,31 @@ public class Point {
         this.autoId = autoId;
     }
 
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public double getAzimuth() {
+        return azimuth;
+    }
+
+    public void setAzimuth(double azimuth) {
+        this.azimuth = azimuth;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
     public String toJson() throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(this);
@@ -46,13 +74,5 @@ public class Point {
                 ", lon=" + lon +
                 ", autoId='" + autoId + '\'' +
                 '}';
-    }
-
-    public void setTime(long time) {
-        this.time = time;
-    }
-
-    public long getTime() {
-        return time;
     }
 }
