@@ -3,6 +3,7 @@ package jdev.tracker.core;
 import jdev.tracker.core.services.DataPeekService;
 import jdev.tracker.core.services.DataSendService;
 import jdev.tracker.core.services.GpsService;
+import jdev.tracker.core.services.TrackService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -19,9 +20,13 @@ public class InjectionContext {
     public DataPeekService peekService() {
         return new DataPeekService();
     }
-
     @Bean
     public DataSendService sendService() {
         return new DataSendService();
     }
+    @Bean
+    public TrackService trackService() {
+        return new TrackService();
+    }
+
 }

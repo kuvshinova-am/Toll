@@ -10,7 +10,7 @@ public class Point {
     private String autoId;
     private long time;
     private double azimuth;
-    private int speed;
+    private double speed;
 
 
     public double getLat() {
@@ -54,11 +54,11 @@ public class Point {
         this.azimuth = azimuth;
     }
 
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    public void setSpeed(double speed) {
         this.speed = speed;
     }
 

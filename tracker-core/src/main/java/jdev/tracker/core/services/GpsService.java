@@ -9,21 +9,14 @@ import javax.annotation.PostConstruct;
 
 @Service
 public class GpsService {
-    private int currentLet = 0;
-    private int currentLon = 0;
-    private int currentAzimuth = 0;
-    private int currentSpeed = 0;
+    private int i = 0;
+
+    @Autowired
+    private TrackService trackService;
 
     @PostConstruct
     @Scheduled(cron = "*/1 * * * * *")
     public Point getCoordinates() {
-        Point point = new Point();
-        point.setLat(currentLet++);
-        point.setLon(currentLon++);
-        point.setAutoId("o567gfd");
-        point.setTime(System.currentTimeMillis());
-        point.setAzimuth(currentAzimuth++);
-        point.setSpeed(currentSpeed++);
-        return point;
+        return trackService.getPoints().get(i++);
     }
 }

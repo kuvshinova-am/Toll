@@ -7,11 +7,15 @@ subprojects{
     dependencies {
         // https://mvnrepository.com/artifact/org.springframework/spring-context
         compile group: 'org.springframework', name: 'spring-context', version: '4.3.7.RELEASE'
+        // https://mvnrepository.com/artifact/org.springframework/spring-test
+        testCompile group: 'org.springframework', name: 'spring-test', version: '4.3.9.RELEASE'
         testCompile group: 'junit', name: 'junit', version: '4.12'
         // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
         compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
         // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
         compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.2'
+        // https://mvnrepository.com/artifact/de.micromata.jak/JavaAPIforKml
+        compile group: 'de.micromata.jak', name: 'JavaAPIforKml', version: '2.2.1'
     }
 }
 
@@ -74,5 +78,12 @@ project(':tracker-ui') {
 
     task fatJar(type: OneJar) {
         mainClass = 'jdev.tracker.ui.Main'
+    }
+}
+
+project(':track-on-map') {
+    apply plugin: 'java-library-distribution'
+    dependencies {
+        compile project(':common')
     }
 }
