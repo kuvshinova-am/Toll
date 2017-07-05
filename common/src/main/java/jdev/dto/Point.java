@@ -37,7 +37,6 @@ public class Point {
         this.autoId = autoId;
     }
 
-
     public void setTime(long time) {
         this.time = time;
     }

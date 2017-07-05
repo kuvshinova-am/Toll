@@ -18,7 +18,8 @@ public class TrackService {
     private long time = 1498998207587L;
     @PostConstruct
     public void loadTrack() throws FileNotFoundException {
-        final Kml kml = Kml.unmarshal(new File("17741.kml"));
+//        final Kml kml = Kml.unmarshal(new File("17741.kml"));
+        final Kml kml = Kml.unmarshal(new File(getClass().getClassLoader().getResource("17741.kml").getFile()));
         Feature feature = kml.getFeature();
         parseFeature(feature);
     }
