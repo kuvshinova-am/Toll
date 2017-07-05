@@ -7,15 +7,16 @@ subprojects{
     dependencies {
         // https://mvnrepository.com/artifact/org.springframework/spring-context
         compile group: 'org.springframework', name: 'spring-context', version: '4.3.7.RELEASE'
-        // https://mvnrepository.com/artifact/org.springframework/spring-test
-        testCompile group: 'org.springframework', name: 'spring-test', version: '4.3.9.RELEASE'
-        testCompile group: 'junit', name: 'junit', version: '4.12'
         // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
         compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
         // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
         compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.2'
         // https://mvnrepository.com/artifact/de.micromata.jak/JavaAPIforKml
         compile group: 'de.micromata.jak', name: 'JavaAPIforKml', version: '2.2.1'
+        // https://mvnrepository.com/artifact/org.springframework/spring-test
+        testCompile group: 'org.springframework', name: 'spring-test', version: '4.3.9.RELEASE'
+        // https://mvnrepository.com/artifact/junit/junit
+        testCompile group: 'junit', name: 'junit', version: '4.12'
     }
 }
 
@@ -25,6 +26,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.github.rholder:gradle-one-jar:1.0.4'
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE")
     }
 }
 
@@ -37,11 +39,21 @@ project(':common') {
 project(':server-core') {
     apply plugin: 'java-library-distribution'
     apply plugin: 'gradle-one-jar'
+    apply plugin: 'org.springframework.boot'
+
     dependencies {
         compile project(':common')
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        compile("org.springframework.boot:spring-boot-devtools")
+        testCompile("org.springframework.boot:spring-boot-starter-test")
     }
     task fatJar(type: OneJar) {
         mainClass = 'jdev.server.core.Main'
+    }
+
+    jar {
+        baseName = 'gessing-boot'
+        version =  '0.1.0'
     }
 }
 
@@ -59,13 +71,22 @@ project(':server-ui') {
 project(':tracker-core') {
     apply plugin: 'java-library-distribution'
     apply plugin: 'gradle-one-jar'
+    apply plugin: 'org.springframework.boot'
 
     dependencies {
         compile project(':common')
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        compile("org.springframework.boot:spring-boot-devtools")
+        testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 
     task fatJar(type: OneJar) {
         mainClass = 'jdev.tracker.core.Main'
+    }
+
+    jar {
+        baseName = 'gessing-boot'
+        version =  '0.1.0'
     }
 }
 

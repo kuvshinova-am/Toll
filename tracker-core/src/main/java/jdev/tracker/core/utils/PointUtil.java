@@ -1,6 +1,6 @@
-package jdev.tracker.core;
+package jdev.tracker.core.utils;
 
-public class PointCalculation {
+public class PointUtil {
 
     private static final double PI = Math.PI;
     private static final double R = 6372795;

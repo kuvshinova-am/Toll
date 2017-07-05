@@ -2,7 +2,7 @@ package jdev.tracker.core.services;
 
 import de.micromata.opengis.kml.v_2_2_0.*;
 import jdev.dto.Point;
-import jdev.tracker.core.PointCalculation;
+import jdev.tracker.core.utils.PointUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -18,7 +18,6 @@ public class TrackService {
     private long time = 1498998207587L;
     @PostConstruct
     public void loadTrack() throws FileNotFoundException {
-//        final Kml kml = Kml.unmarshal(new File("17741.kml"));
         final Kml kml = Kml.unmarshal(new File(getClass().getClassLoader().getResource("17741.kml").getFile()));
         Feature feature = kml.getFeature();
         parseFeature(feature);
@@ -41,7 +40,7 @@ public class TrackService {
                         time += (30000 + (Math.random() * 600000));
                         point.setTime(time);
                         point.setAzimuth(
-                                PointCalculation.calculateAzimuth(
+                                PointUtil.calculateAzimuth(
                                         coordinates.get(i-1).getLatitude(),
                                         coordinates.get(i).getLatitude(),
                                         coordinates.get(i-1).getLongitude(),
