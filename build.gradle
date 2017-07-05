@@ -80,10 +80,3 @@ project(':tracker-ui') {
         mainClass = 'jdev.tracker.ui.Main'
     }
 }
-
-project(':track-on-map') {
-    apply plugin: 'java-library-distribution'
-    dependencies {
-        compile project(':common')
-    }
-}
