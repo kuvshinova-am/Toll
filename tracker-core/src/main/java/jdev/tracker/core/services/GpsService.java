@@ -1,6 +1,5 @@
 package jdev.tracker.core.services;
 
-import jdev.dto.Point;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -14,9 +13,12 @@ public class GpsService {
     @Autowired
     private TrackService trackService;
 
+    @Autowired
+    private DataPeekService dataPeekService;
+
     @PostConstruct
     @Scheduled(cron = "*/1 * * * * *")
-    public Point getCoordinates() {
-        return trackService.getPoints().get(i++);
+    public void getCoordinates() throws InterruptedException {
+        dataPeekService.put(trackService.getPoints().get(i++));
     }
 }
