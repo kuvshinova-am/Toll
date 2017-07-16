@@ -18,4 +18,8 @@ public class DataPeekService {
     Point get() throws InterruptedException {
         return  queue.take();
     }
+
+    BlockingDeque<Point> getAll() {
+        return queue;
+    }
 }
