@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Добро пожаловать</title>
+    </head>
+    <body>
+        <h1>Добро пожаловать</h1>
+        <p>Вход для клиентов</p>
+        <form th:action="@{/routes}">
+            <input type="submit" value="Войти"/>
+        </form>
+        <p>Вход для менеджеров</p>
+        <form th:action="@{/registerClient}">
+            <input type="submit" value="Войти"/>
+        </form>
+        <p>Вход для администраторов</p>
+        <form th:action="@{/registerManager}">
+            <input type="submit" value="Войти"/>
+        </form>
+    </body>
+</html>
