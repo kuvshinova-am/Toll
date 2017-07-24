@@ -17,9 +17,6 @@ subprojects{
         testCompile group: 'org.springframework', name: 'spring-test', version: '4.3.9.RELEASE'
         // https://mvnrepository.com/artifact/junit/junit
         testCompile group: 'junit', name: 'junit', version: '4.12'
-
-//        // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
-//        compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.0.pr4'
         // https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-lgpl
         compile group: 'org.codehaus.jackson', name: 'jackson-mapper-lgpl', version: '1.9.13'
         // https://mvnrepository.com/artifact/commons-collections/commons-collections
@@ -65,13 +62,28 @@ project(':server-core') {
 }
 
 project(':server-ui') {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
     apply plugin: 'java-library-distribution'
     apply plugin: 'gradle-one-jar'
     dependencies {
         compile project(':common')
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        compile("org.springframework.boot:spring-boot-starter-web")
+        // tag::security[]
+        compile("org.springframework.boot:spring-boot-starter-security")
+        // end::security[]
+        testCompile("junit:junit")
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile("org.springframework.security:spring-security-test")
     }
     task fatJar(type: OneJar) {
         mainClass = 'jdev.server.ui.Main'
+    }
+
+    jar {
+        baseName = 'security-boot'
+        version =  '0.1.0'
     }
 }
 
