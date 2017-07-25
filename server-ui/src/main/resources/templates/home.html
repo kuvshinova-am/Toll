@@ -4,18 +4,13 @@
         <title>Добро пожаловать</title>
     </head>
     <body>
-        <h1>Добро пожаловать</h1>
-        <p>Вход для клиентов</p>
-        <form th:action="@{/routes}">
-            <input type="submit" value="Войти"/>
-        </form>
-        <p>Вход для менеджеров</p>
-        <form th:action="@{/registerClient}">
-            <input type="submit" value="Войти"/>
-        </form>
-        <p>Вход для администраторов</p>
-        <form th:action="@{/registerManager}">
-            <input type="submit" value="Войти"/>
+        <h1 th:inline="text">Добро пожаловать [[${#httpServletRequest.remoteUser}]]!</h1>
+        <p> Если вы хотите посмотреть свои маршруты нажмите <a th:href="@{/routes}">здесь</a></p>
+        <p> Если вы хотите посмотреть свои платежи нажмите <a th:href="@{/payments}">здесь</a></p>
+        <p> Если вы хотите зарегестировать нового клиента нажмите <a th:href="@{/registerClient}">здесь</a></p>
+        <p> Если вы хотите зарегестировать нового менеджера нажмите <a th:href="@{/registerManager}">здесь</a></p>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Выйти из системы"/>
         </form>
     </body>
 </html>
