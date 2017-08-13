@@ -16,6 +16,7 @@ public class TrackService {
 
     private ArrayList<Point> points = new ArrayList<>();
     private long time = 1498998207587L;
+
     @PostConstruct
     public void loadTrack() throws FileNotFoundException {
         final Kml kml = Kml.unmarshal(new File(getClass().getClassLoader().getResource("17741.kml").getFile()));

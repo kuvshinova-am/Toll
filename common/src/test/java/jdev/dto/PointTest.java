@@ -1,8 +1,9 @@
 package jdev.dto;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -25,10 +26,16 @@ public class PointTest {
     }
 
     @Test
-    public void decodeDto() throws Exception {
+    public String toString() {
         ObjectMapper mapper = new ObjectMapper();
-        Point dto = mapper.readValue(expected, Point.class);
+        Point dto = null;
+        try {
+            dto = mapper.readValue(expected, Point.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         assertEquals(autoId, dto.getAutoId());
         assertEquals(1489900897458L, dto.getTime());
+        return null;
     }
 }
