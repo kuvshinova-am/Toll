@@ -15,8 +15,11 @@ public class PointController {
 
     private static final Logger log = LoggerFactory.getLogger(PointController.class);
 
-    @Autowired
-    RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
+
+    public PointController(@Autowired RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     @RequestMapping(value = "/point/", method = RequestMethod.POST, headers = "Accept=application/json")
     @ResponseBody
