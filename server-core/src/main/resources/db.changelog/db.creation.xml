@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="db.creation" author="kuvshinova-am">
+        <sql>
+            CREATE TABLE AUTO
+            (
+            ID INT AUTO_INCREMENT PRIMARY KEY,
+            idAuto VARCHAR(8) NOT NULL,
+            brand VARCHAR(32) NOT NULL,
+            model VARCHAR(32) NOT NULL,
+            CONSTRAINT USER_AUTO_AUTO_RELATION FOREIGN KEY (ID) REFERENCES USER_AUTO (AUTO_ID) ON DELETE CASCADE
+            );
+
+            CREATE TABLE POINT
+            (
+            ID INT AUTO_INCREMENT PRIMARY KEY,
+            LAT DOUBLE NOT NULL,
+            LON DOUBLE NOT NULL,
+            AUTO_ID INTEGER NOT NULL,
+            TIME NUMBER NOT NULL,
+            AZIMUTH DOUBLE NOT NULL,
+            SPEED DOUBLE NOT NULL,
+            CONSTRAINT AUTO_ID_FK FOREIGN KEY (AUTO_ID) REFERENCES AUTO (ID)
+            );
+
+            CREATE TABLE ROLE
+            (
+            ID INTEGER AUTO_INCREMENT PRIMARY KEY,
+            NAME VARCHAR(32) NOT NULL
+            )
+
+            CREATE TABLE USER
+            (
+            ID INTEGER AUTO_INCREMENT PRIMARY KEY,
+            FIRST_NAME VARCHAR(32) NOT NULL,
+            LAST_NAME VARCHAR(32) NOT NULL,
+            PATRONYMIC VARCHAR(32),
+            DATE_OF_BIRTH DATE NOT NULL,
+            DRIVERS_LICENSE INTEGER NOT NULL,
+            ROLE INTEGER NOT NULL,
+            CONSTRAINT ROLE_FK FOREIGN KEY (ROLE) REFERENCES ROLE (ID),
+            CONSTRAINT USER_AUTO_USER_RELATION FOREIGN KEY (ID) REFERENCES USER_AUTO (USER_ID) ON DELETE CASCADE
+            );
+
+        </sql>
+    </changeSet>
+</databaseChangeLog>
