@@ -15,8 +15,21 @@ public class Role {
     @Column(name = "NAME", length = 32, nullable = false)
     String name;
 
+    public Role(String name) {
+        this.name = name;
+    }
+
+    public Role() {
+    }
+
+    public Role(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+
     public String toString() {
-        return "Point{ id=" + id + ", name=" + name + " }";
+        return "Role{ id=" + id + ", name=" + name + " }";
     }
 
     public int getId() {

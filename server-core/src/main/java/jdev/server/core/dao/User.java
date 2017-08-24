@@ -1,11 +1,10 @@
 package jdev.server.core.dao;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.AUTO;
-
 @Entity
 @Table(name="user")
 public class User {
@@ -25,25 +24,44 @@ public class User {
     String patronymic;
 
     @Column(name = "DATE_OF_BIRTH", nullable = false)
-    Date dateOfBirth;
+    String dateOfBirth;
 
     @Column(name = "DRIVERS_LICENSE", length = 10, nullable = false)
-    Integer driversLicense;
+    Long driversLicense;
 
-    @OneToOne(fetch = FetchType.LAZY, targetEntity = Role.class)
-    @PrimaryKeyJoinColumn(name = "ID")
-    Integer role;
+    @OneToOne(fetch = FetchType.EAGER, targetEntity = Role.class, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "ROLE")
+    Role role;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Auto.class)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_auto", joinColumns = {
-            @JoinColumn(name = "USER_ID", nullable = false, updatable = false) },
-            inverseJoinColumns = { @JoinColumn(name = "AUTO_ID",
-                    nullable = false, updatable = false) })
-    java.util.Set<Auto> autos;
+            @JoinColumn(name = "USER_ID", nullable = false, updatable = false)
+        },
+        inverseJoinColumns = {
+            @JoinColumn(name = "AUTO_ID", nullable = false, updatable = false)
+        }
+    )
+    java.util.Set<Auto> autos = new HashSet<>();
+
+    public User() {
+    }
+
+    public User(Integer id, String firstName, String lastName, String patronymic, String dateOfBirth,
+                Long driversLicense, Role role, Set<Auto> autos) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.patronymic = patronymic;
+        this.dateOfBirth = dateOfBirth;
+        this.driversLicense = driversLicense;
+        this.role = role;
+        this.autos = autos;
+    }
+
 
     public String toString() {
-        return "Point{ id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", patronymic=" + patronymic
-                + ", dateOfBirth=" + dateOfBirth + ", " + "driversLicense=" + driversLicense + ", role=" + role + " }";
+        return "User{ id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", patronymic=" + patronymic
+                + ", dateOfBirth=" + dateOfBirth + ", " + "driversLicense=" + driversLicense + ", role=" + role + ", " + autos + " }";
     }
 
     public int getId() {
@@ -78,27 +96,27 @@ public class User {
         this.patronymic = patronymic;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Integer getDriversLicense() {
+    public Long getDriversLicense() {
         return driversLicense;
     }
 
-    public void setDriversLicense(Integer driversLicense) {
+    public void setDriversLicense(Long driversLicense) {
         this.driversLicense = driversLicense;
     }
 
-    public Integer getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(Integer role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

@@ -1,6 +1,7 @@
 package jdev.server.core.dao;
-
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.AUTO;
 
@@ -13,7 +14,7 @@ public class Auto {
     @Column(name = "ID")
     int id;
 
-    @Column(name = "ID_AUTO", length = 8, nullable = false)
+    @Column(name = "ID_AUTO", length = 8, nullable = false, unique = true)
     String idAuto;
 
     @Column(name = "BRAND", length = 32, nullable = false)
@@ -22,15 +23,29 @@ public class Auto {
     @Column(name = "MODEL", length = 32,  nullable = false)
     String model;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = User.class)
-    @JoinTable(name = "user_auto", joinColumns = {
-            @JoinColumn(name = "AUTO_ID", nullable = false, updatable = false) },
-            inverseJoinColumns = { @JoinColumn(name = "USER_ID",
-                    nullable = false, updatable = false) })
-    java.util.Set<User> users;
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "autos")
+    java.util.Set<User> users = new HashSet<>();
 
     public String toString() {
-        return "Point{ id=" + id + ", idAuto=" + idAuto + ", idUser=" + brand + ", model=" + model + " }";
+        return "Auto{ id=" + id + ", idAuto=" + idAuto + ", idUser=" + brand + ", model=" + model + " }";
+    }
+
+    public Auto(Integer id, String idAuto, String brand, String model) {
+        this.id = id;
+        this.idAuto = idAuto;
+        this.brand = brand;
+        this.model = model;
+    }
+
+    public Auto(Integer id, String idAuto, String brand, String model, Set<User> users) {
+        this.id = id;
+        this.idAuto = idAuto;
+        this.brand = brand;
+        this.model = model;
+        this.users = users;
+    }
+
+    public Auto() {
     }
 
     public int getId() {

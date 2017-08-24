@@ -9,6 +9,8 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
+
+
 import static org.junit.Assert.*;
 public class PointControllerTest {
     private TestRestTemplate restTemplate;
